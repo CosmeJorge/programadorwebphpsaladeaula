@@ -17,32 +17,35 @@ Escreva um programa que leia um número.
 O programa deverá verificar se o número
 é par ou impar.
 
+10 / 2 = 5; resto = 0;
 
+% mod --> é um operador que retorna o resto de uma divisão.
+
+10 % 2 = 0;
+
+9 % 2 = 1;
     </p>
     <hr/>
-    <h2 style="text-align: center">Entrada numérica</h2>
+    <h2 style="text-align: center">Informações dos Produtos</h2>
     <fieldset>
-        <legend>Número a ser lido</legend>
+        <legend>Dados do Produto</legend>
     <?php
         $numero = $_GET["n"];
-        
-        if($numero > 0) {
-           echo "<h1  style='text-align: center'>Núm. Positivo!</h1>";
-         if($numero > 10) {
-            echo "<h1 style='text-align: center'>Núm. Válido!</h1>";
-        }} else if($numero < 0) {
-            echo "<h1 style='text-align: center'>Núm. Negativo!</h1>";
+        $resto = $numero % 2; //% = modulo é o resto da divisão
+
+        //Desvio condicional composto
+        if($resto == 0){
+           echo "<h1  style='text-align: center'>Par!</h1>";
         } else {
-            echo "<h1 style='text-align: center'>Núm. Não Válido!</h1>";
+            echo "<h1 style='text-align: center'>Impar!</h1>";
         }
-    
 
     ?>
     <br>
     </fieldset>
     <br>
     <br>
-	<a href="prog6.html">Voltar</a>
+	<a href="prog3.html">Voltar</a>
     
 </div>
 </body>
