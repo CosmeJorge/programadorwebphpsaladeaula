@@ -37,7 +37,7 @@
        $pessoa["tem_cnh"] = false;
        print_r($pessoa);
        echo "<br>";
-       echo "Minha forma";
+       echo "Minha forma <br>";
        foreach ($pessoa as $i => $v) {
             if ($i == "tem_cnh")  {
               // $v == 1 ? $v = "sim" : $v ="não" ; a variável já é boleano
@@ -45,10 +45,10 @@
             }
             echo "$i  $v <br>";
         }
-        echo "forma do mestre";
+        echo "forma do mestre <br>";
             //solução feita pelo professor
             foreach ($pessoa as $i => $v) {
-                echo "O valor de $i é " . ($campo == "tem_cnh" ? ($v ? "Sim" : "Não"): "$v <br>");
+                echo "O valor de $i é " . ($i == "tem_cnh" ? ($v ? "Sim" : "Não"): "$v <br>");
                 
                 }
        
