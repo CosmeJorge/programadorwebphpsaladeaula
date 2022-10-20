@@ -23,16 +23,13 @@
         <?php
        
         include "funcoes.php";
+        include "funcoes2.php";
 
-       escreva_texto();
-       escreva_texto2("Cosme Jorge");
-       p_linha(-9);
-       hoje();
-       soma(4,2);
-       soma2(15, 78, 55, 1, 25, 36);
-       subtrai(4,2);
-       multipli(4,2);
-       dividi(4,0);
+        escreva_texto2("Meu texto executado por um procedimento");
+        $texto = escreva_texto3("Meu texto executado por uma função com retorno");
+        p_linhar(4);
+        echo $texto;
+      
        ?>
         </pre>
 
