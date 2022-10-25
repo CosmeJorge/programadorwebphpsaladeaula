@@ -14,11 +14,11 @@
               echo "<p style='text-align: center;'>$agora </p>";
         
           }
-          function p_linha($pulo){
+          function pulaLinha($pulo){
               $i=1;
               do{
                   
-                  echo "$i <br>";
+                  echo "<br>";
                   $i++;
                 }while ($i <= $pulo);
                 
