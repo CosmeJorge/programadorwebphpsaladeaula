@@ -23,16 +23,45 @@
         <hr>
       
         <?php
-        $cpf = str_split($_POST["cpf"]);
-        for (i=0, i< count($cpf), i++){
+        include "desafio_cpf_F.php";
+        
+    
+        $nome = $_POST["nome"];
+        $cpf = $_POST["cpf"];
+        $email = $_POST["email"];
+        $tel = $_POST["tel"];
+        
+        if(verifica_cpf($cpf)){
             
+                echo "Nome: " . $nome;
+                echo "<br>CPF: " . $cpf;
+                echo "<br>E-mail: " . $email;
+                echo "<br>Telefone: " . $tel;
+    
+                //Informação do local 
+                date_default_timezone_set("America/Sao_Paulo");
+    
+                //Processo  de gravação em arquivo txt
+                $arquivo = fopen("dados.txt", "a+");//Abre o arquivo
+                
+                //Escrevendo no arquivo: fwrite(arquivo, "dados");
+                fwrite($arquivo, "Dados do Aluno - Cadastro realizado em: ". date("d/mY") . " as " . date("H:i:s"));
+                fwrite($arquivo, "\nNome: ". $nome);
+                fwrite($arquivo, "\nCPF: ".$cpf);
+                fwrite($arquivo, "\nE-mail: ". $email);
+                fwrite($arquivo, "\nTelefone: ". $tel);
+                fwrite($arquivo, "\n----------------------------------\n\n");
+                fclose($arquivo); //Fecha o arquivo
+    
+        }else {
+            echo "<br><h2 style='text-align: center;'>$cpf <br>Invalido.</h2>";
         }
-        print_r($vcpf);
-
+    
+    
 
         ?>
         
-        <a href="exemploFor02.html"> 
+        <a href="desafio_cpf.php"> 
             <i class="bi bi-reply" style="font-size: 2rem; color: cornflowerblue;"></i>
         </a>
         
