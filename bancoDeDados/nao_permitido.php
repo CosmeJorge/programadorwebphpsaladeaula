@@ -1,7 +1,4 @@
-<?php
-require_once 'protect.php';
-?>
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -19,20 +16,16 @@ require_once 'protect.php';
 <body>
     <div>
     <?php 
-    $idUsuario = $_SESSION["id"];
-    $nomeUsuario = $_SESSION["nome"];
+    
 
-    echo "<br><h2 style='text-align: center;'>Bem vindo ao Sistema!<br>$nomeUsuario</h2>";
+    echo "<br><h2 style='text-align: center;'>Você não pode acessar esta página sem esta logado <br></h2>";
 
     ?>
     <a href="index.php" class="btn btn-link">
             <i class="bi bi-reply" style="font-size: 2rem;"></i>
 
         </a>
-        <a href="logout.php" class="btn btn-link">
-            <i class="bi bi-door-closed" style="font-size: 2rem;"></i>
-
-        </a>
+       
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
