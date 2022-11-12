@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<?php require "html/head.php"; ?>
+
+<head>
+	<?php require "html/head.php" ?>
+</head>
 
 	<!--  -->
 	<body>
-		<header>
-			<section>
-				<figure id="logo">
-					<img src="img/favicon.ico" alt="Logo">
-				</figure>
-				<input type="text" name="buscar" id="buscar" placeholder="Busque aqui" >
-				<h1 id="textoEnviamos">Enviamos produtos para todo o território nacional.</h1>
-				<figure style="border: none">
-					<img id="carrinho" src="img/carrinhoCompra.png" alt="">
-					<img id="cliente" src="img/clientes.png" alt="">
-				</figure>
-			</section>
-			<?php include "html/menu.php"; ?>
 
-		</header>
+	<?php include "html/header.php" ?>
+
 		<main>
 			<!-- <h1>SOBRE MIM</h1> -->
 			<!-- <h1>SOBRE O SENAC</h1> -->
@@ -69,7 +60,8 @@
 			<h1 id="nomeCliente">João de Santo Cristo</h1>
 		</figure>
 		<aside>
-		<?php include "html/menu.php"; ?>
+			
+		<?php include "html/menu.php" ?> 
 
 			<ul class="icones-sociais">
 				<!-- <li>
@@ -128,9 +120,14 @@
 			</p>
 		</main>
 		
-		<footer>
-			&copy; Site Estudo
-		</footer>
+		<?php
+			include "html/rodaPe.php";
+		?>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
 </body>
 
 </html>
