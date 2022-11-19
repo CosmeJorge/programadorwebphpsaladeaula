@@ -68,7 +68,7 @@
 					<div class="card-body">
 					<h5 class="card-title"><?=$produto['nome']?></h5>
 					<p class="card-text"><?=substr($produto['descricao'],0, 100)?></p>
-					<a href="mais_detalhes.php" class="btn btn-primary">Mais detalhes</a>
+					<a href="mais_detalhes.php?id=<?= $produto['idproduto'];?>" class="btn btn-primary">Mais detalhes</a>
 					</div>
 				</div>
 			</div>

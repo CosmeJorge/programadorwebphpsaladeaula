@@ -10,22 +10,22 @@
 	?>
 	
 	<script>
-			function selecao() {
+		function selecao() {
 
-if (f.tipo.value == "HARDWARE") {
-	document.getElementById("perid").value = "";
-	document.getElementById("divHar").style.display = 'block';
-	document.getElementById("harid").disabled = false;
-	document.getElementById("perid").disabled = true;
-	document.getElementById("divPer").style.display = 'none';
-} else {
-	document.getElementById("harid").value = "";
-	document.getElementById("divHar").style.display = 'none';
-	document.getElementById("harid").disabled = true;
-	document.getElementById("perid").disabled = false;
-	document.getElementById("divPer").style.display = 'block';
-}
-}
+		if (f.tipo.value == "HARDWARE") {
+			document.getElementById("perid").value = "";
+			document.getElementById("divHar").style.display = 'block';
+			document.getElementById("harid").disabled = false;
+			document.getElementById("perid").disabled = true;
+			document.getElementById("divPer").style.display = 'none';
+		} else {
+			document.getElementById("harid").value = "";
+			document.getElementById("divHar").style.display = 'none';
+			document.getElementById("harid").disabled = true;
+			document.getElementById("perid").disabled = false;
+			document.getElementById("divPer").style.display = 'block';
+		}
+	}
 </script>
 </head>
 
