@@ -62,7 +62,11 @@
                     <td><?=$cliente["ativo"]; ?></td>
                     <td>
                         <a href="edicaoCliente.php?id=<?=$cliente['idcliente']; ?>">[EDITAR]</a>
-                        <a href="excluirCliente.php?id=<?=$cliente['idcliente']; ?>">[EXCLUIR]</a>
+                        <?php
+			            if(isset($_SESSION['tipo']) && $_SESSION['tipo'] =="Administrador"){ ?>
+
+                           <a href="excluiCliente.php?id=<?=$cliente['idcliente']; ?>" data-bs-target="#exclui_cli_modal">[EXCLUIR]</a>
+                        <?php }?>
                     </td>
                    <?php endforeach ?> 
                 </tr>

@@ -107,9 +107,15 @@
 							<input type="password" name="senha" class="form-control"><br>
 
 							<!-- <input type="submit" value="Entrar" class="btn btn-primary"> -->
+								<?php
+								if(isset($_SESSION['tipo']) && $_SESSION['tipo'] =="Administrador"){
+									
+									echo "<a href='cadastroFuncionario.php'>Cadastrar Funcionário</a>'";
+								}
+								
+								?>
 
-
-							<a href="cadastroFuncionario.php">Cadastrar Funcionário</a>
+							
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -119,3 +125,26 @@
 				</div>
 			</div>
 	</div>
+			<!-- Modal -->
+<div class="modal fade" id="exclui_cli_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Excluir Cliente</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<form action="src/controler/cliente_db/excluiCliente.php" method="post" >
+						<div class="modal-body">
+
+						<h2 style="text-align: center;">Esta operação não podera ser desfeita <br> Tem certeza?</h2>
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-danger">Excluir</button>
+						</div>
+					</form>
+				</div>
+			</div>
+</div>
+		
