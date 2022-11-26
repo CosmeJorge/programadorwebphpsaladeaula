@@ -7,7 +7,8 @@
 
 	<!--  -->
 	<body>
-		<?php 
+        <?php 
+        require_once "src/protect.php";
         if(!isset($_SESSION['tipo'])){ header("Location: nao_permitido.php");}
         include "html/header.php"; 
         require_once "src/conexao.php";
