@@ -14,13 +14,13 @@
             ?>
             <li><a href="sobre_nos.php">Sobre nós</a></li>
             <li><a href="contato.php">Contatos</a></li>
-            <?php
-            if(isset($_SESSION['nome'])){
-                $varlocal = "Bem vindo " . $_SESSION['nome'];
-                echo '<li style="float: right"><a href="clienteConfig.php">$varlocal</a></li>';
-                
-            }
-            ?>
+            <?php if(isset($_SESSION['nome'])){?>
+                <!-- <li style="float: right;"><a href="clienteConfig.php"> -->
+                <li style="float: right;"><a href=<?=isset($_SESSION['tipo']) ?"funcionarioConfig.php" : "clienteConfig.php" ?>>
+                    BEM VINDO: <?= substr($_SESSION['nome'], 0, 
+                    strpos($_SESSION['nome'], " ")); ?>
+                </a></li>
+            <?php } ?>
 
         </ul>
     </nav>

@@ -21,15 +21,12 @@
         require_once "src/model/Cliente.php";
 		
 		$id = isset($_SESSION["id"]) ? $_SESSION["id"] : 0;
-		// $telefone = "SELECT FROM contato WHERE id_cliente = idCliente";
-		// var_dump($telefone);
-		// echo "<br> <br> tamanho da variável é: ". strlen($telefone);
 		
 		
         ?>
 
 		<main>
-		<h4 style="text-align: center">Cliente - Edição de Dados</h4>
+		<h4 style="text-align: center">Funcionário - Edição de Dados</h4>
         <div class = "row row-cols-1 row-cols-md-3 g-4" >
 		
 			<a href="#">
