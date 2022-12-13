@@ -5,7 +5,12 @@ $hostname = "localhost";
 $banco_de_dados = "projeto";
 $usuario = "root";
 $senha = "";
-//Conexão online
+//Conexão infinity free
+/*$hostname = "sql101.epizy.com";
+$banco_de_dados = "epiz_33158090_projetoDB";
+$usuario = "epiz_33158090";
+$senha = "JUm8KRSgnmWXVvg";
+//Conexão 000webhost
 /*$hostname = "localhost";
 $banco_de_dados = "id19904087_projetobd";
 $usuario = "id19904087_desenvolvedor";

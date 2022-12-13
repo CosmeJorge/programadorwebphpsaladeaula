@@ -50,6 +50,11 @@
 							<input type="password" name="senha" class="form-control"><br>
 
 							<!-- <input type="submit" value="Entrar" class="btn btn-primary"> -->
+							<div calss="formgroup">
+							<input id="lembrar" name="lembrar" type="checkbox" >
+							<label for="lembrar">Lembrar meu e-mail</label>
+							<br><br>
+							</div>
 
 
 							<a href="cadastroCliente.php">Crie o seu CADASTRO</a>

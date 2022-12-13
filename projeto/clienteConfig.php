@@ -32,7 +32,7 @@
 		<h4 style="text-align: center">Cliente - Edição de Dados</h4>
         <div class = "row row-cols-1 row-cols-md-3 g-4" >
 		
-			<a href="#">
+			<a href="#?aba=0">
 			<div class="col" >
 				<div class="card" >
 					<i class="bi bi-person-square text-center text-success" style="font-size: 10rem;"></i>
@@ -43,7 +43,7 @@
 			</div>
 			</a>
 	
-			<a href="#">
+			<a href="#?aba=1">
 			<div class="col" >
 				<div class="card" >
 					<i class="bi bi-house text-center text-danger" style="font-size: 10rem;"></i>
@@ -54,7 +54,7 @@
 			</div>
 			</a>
 	
-			<a href="#">
+			<a href="#?aba=2">
 			<div class="col" >
 				<div class="card" >
 					<i class="bi bi-telephone text-center" style="font-size: 10rem;"></i>
@@ -65,7 +65,7 @@
 			</div>
 			</a>
 	
-			<a href="#">
+			<a href="#?aba=3">
 			<div class="col" >
 				<div class="card" >
 					<i class="bi bi-table text-center" style="font-size: 10rem;"></i>

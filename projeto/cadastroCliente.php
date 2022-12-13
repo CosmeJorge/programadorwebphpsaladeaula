@@ -75,7 +75,7 @@
 
             $sql_code = "INSERT INTO cliente  VALUES (NULL, '$nome', '$dataNascimento', '$orgao', '$rg', '$cpf', '$estadoCivil', '$sexo', '$email', '$senha', true)";
 			
-            $sql_query = @$conexao->query($sql_code);
+            $sql_query = $conexao->query($sql_code);
 			// var_dump($sql_query);
 
 			// if($conexao->query($sql_code)){
@@ -191,7 +191,7 @@
 					</div>
 				</div>
 				<div class="col-12">
-					<button class="btn btn-primary" type="submit" id="btn-off" disabled style="display: none">Cadastrar</button>
+					<button class="btn btn-primary" type="submit" id="btn-off" disabled style="display: none">Serve para</button>
 					<button class="btn btn-primary" type="submit" id="btn-on" >Cadastrar</button>
 				</div>
 			</form>
