@@ -58,14 +58,22 @@
 			<td><?= $produto['ativo']?></td>
 			<td>
 			<?php
+			
 			if(isset($_SESSION['tipo']) && $_SESSION['tipo'] =="Administrador"){
 				$idproduto = $produto['idproduto'];
-				echo "<a href='estoque.php?id=$idproduto;'>[ESTOQUE]</a>";
+				echo "<a href='estoque.php?id=$idproduto;' style='text-decoration: none;' data-bs-toggle='tooltip' data-bs-placement='left' data-bs-title='Entrada no Estoque'>
+				<i class='bi bi-clipboard-plus' style='font-size: 2rem;'> </i> 
+
+				</a>";
 			}
 			
 			?>
 
-			<a href="mais_detalhes.php?id=<?= $produto['idproduto'];?>">[DETALHES]</a>
+			<a href="mais_detalhes.php?id=<?= $produto['idproduto'];?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Detalhes">
+            
+			<!--[DETALHES]-->
+			<i class="bi bi-clipboard-data" style="font-size: 2rem;"> </i> 
+			</a>
 			</td>
 			</tr>
 			<?php } ?>
@@ -79,6 +87,10 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
+		<script>
+		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 
 </body>
 

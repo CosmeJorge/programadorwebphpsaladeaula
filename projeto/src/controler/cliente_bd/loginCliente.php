@@ -1,3 +1,5 @@
+
+
 <?php
     require_once "../../conexao.php";
 
@@ -51,10 +53,13 @@
                 }
                 
             } else {
-                echo "Falha ao logar! E-mail ou senha incorretos";
+                echo "Falha ao logar! E-mail ou senha incorretos
+                
+                <img src='../../../img/erro.png'></i>";
             }
 
         }
 
     
 ?>
+</html>
