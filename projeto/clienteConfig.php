@@ -32,7 +32,7 @@
 		<h4 style="text-align: center">Cliente - Edição de Dados</h4>
         <div class = "row row-cols-1 row-cols-md-3 g-4" >
 		
-			<a href="#?aba=0">
+			<a href="edicaoCliente.php?aba=0&id=1">
 			<div class="col" >
 				<div class="card" >
 					<i class="bi bi-person-square text-center text-success" style="font-size: 10rem;"></i>

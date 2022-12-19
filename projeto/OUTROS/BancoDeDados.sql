@@ -20,6 +20,9 @@ create table funcionario(
 	ativo boolean
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT into funcionario value ('null','Cosme Jorge', '1965-06-25', '111.111.111-11', 'Casado', 'Administrador', '21985860273', 
+'cosme@cosme.com','$2y$10$PxhG4Mwa0gi1zLfUwd3N3uKMV3UKheelUahjxdF81UCXVd.TJV/XC','true');
+
 create table cliente(
 	idcliente int primary key auto_increment,
 	nome varchar(100) not null,

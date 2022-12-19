@@ -112,13 +112,13 @@
 							<input type="password" name="senha" class="form-control"><br>
 
 							<!-- <input type="submit" value="Entrar" class="btn btn-primary"> -->
-								<?php
+							<?php 
 								if(isset($_SESSION['tipo']) && $_SESSION['tipo'] =="Administrador"){
 									
 									echo "<a href='cadastroFuncionario.php'>Cadastrar Funcionário</a>'";
 								}
 								
-								?>
+							?>
 
 							
 						</div>
