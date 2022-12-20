@@ -2,7 +2,12 @@
 <html lang="pt-br">
 
 <head>
-	<?php require "html/head.php" ?>
+    <?php 
+    require "html/head.php";
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    ?>
 
 </head>
 
@@ -15,68 +20,67 @@
         include_once "src/model/estoque.php";
 
 		$id = isset($_GET["id"]) ? $_GET["id"] : 0;
-		if( $id > 0){
-			$sql_code = "SELECT * FROM produtos JOIN estoque WHERE idproduto = '$id'";
-			$sql_query = $conexao->query($sql_code);
+        $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id'";
+		$sql_query = $conexao->query($sql_code);
 
-			if($sql_query->num_rows > 0){
-                $produto = $sql_query->fetch_assoc();
-                $objproduto = new produto(
-                    $estoque['idproduto'],
-                    $estoque['nome'],
-                    $estoque['tipo'],
-                    $estoque['categoria'],
-                    $estoque['fabricante'],
-                    $estoque['descricao'],
-                    $estoque['foto'],
-                    $estoque['ativo']
+		if($sql_query->num_rows > 0){
+            $estoque = $sql_query->fetch_assoc();
+            $objProduto = new Produto(
+                $estoque['idproduto'],
+                $estoque['nome'],
+                $estoque['tipo'],
+                $estoque['categoria'],
+                $estoque['fabricante'],
+                $estoque['descricao'],
+                $estoque['foto'],
+                $estoque['ativo']
+            );
+            if(isset($estoque['idestoque'])){
+                $objEstoque = new Estoque(
+                    $estoque['idestoque'],
+                    $objProduto,
+                    $estoque['qtd'],
+                    $estoque['registro'],
+                    $estoque['data_registro'],
+                    $estoque['valor_compra'],
+                    $estoque['valor_venda']
                 );
-                if(isset($estoque['idestoque'])){
-                    $objestoque = new estoque(
-                        $estoque['idestoque'],
-                        $objproduto,
-                        $estoque['qtd'],
-                        $estoque['registro'],
-                        $estoque['data_registro'],
-                        $estoque['valor_compra'],
-                        $estoque['valor_venda']
-                        
-                    );
-                } else{
-                        $objestoque = new estoque(
-                            0,
-                            $objproduto,
-                            0,
-                            '---',
-                            '//',
-                            0.0,
-                            0.0
-                        );
+            }else {
+                $objEstoque = new Estoque(
+                    0,
+                    $objProduto,
+                    0,
+                    '---',
+                    '---',
+                    0.0,
+                    0.0
+                );
 
-                }
+            }
                 
-			} else {
-				/*header("Location: produtos.php");*/
-			}
+        } 
+    
+       /* if(isset($_GET['adicionar'])){
+            //Vamos adicionar ao carrinho
+            $item = (int) $_GET['adicionar'];
+        }*/
+    ?>        
 
-		} else {
-			header("Location: index.php");
-		}?>        
 
 		<main>
 		<h1>Detalhes do produto</h1>
         <div class="card">
-            <img src="<?=$produto['foto'];?>" style="width: 20rem; margin: auto" class="card-img-top" alt="...">
+            <img src="<?=$estoque['foto']?>" style="width: 20rem; margin: auto" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <p class="card-text"></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">TIPO: <?=$produto['tipo'];?></li>
-                <li class="list-group-item">CATEGORIA: <?=$produto['categoria'];?></li>
-                <li class="list-group-item">EM ESTOQUE: <?=$produto['qtd'];?></li>
-                <li class="list-group-item">Valor: R$ <?=$produto['valor_venda'];?></li>
-                <li class="list-group-item">Descrição: <?=$produto['descricao'];?></li>
+                <li class="list-group-item">TIPO: <?=$estoque['tipo']?></li>
+                <li class="list-group-item">CATEGORIA: <?=$estoque['categoria'];?></li>
+                <li class="list-group-item">EM ESTOQUE: <?=$estoque['qtd'];?></li>
+                <li class="list-group-item">Valor: R$ <?=$estoque['valor_venda'];?></li>
+                <li class="list-group-item">Descrição: <?=$estoque['descricao'];?></li>
             </ul>
             <div class="card-body">
                 <a href="index.php" class="card-link">Home</a>

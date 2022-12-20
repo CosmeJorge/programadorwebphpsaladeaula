@@ -27,11 +27,13 @@
 
                     //criando o cookie
                     setcookie('cliente', $cliente['nome'],time()+3600, "/");
-
+                    
                     if($lembrar){
-                        setcookie('login', $cliente['email'], strtotime("+1 month"), "/","",false,true);
+                        /*setcookie('login', $cliente['email'], strtotime("+1 month"), "/","",false,true);*/
+                        setcookie('login', $cliente['nome'],time()+3600, "/");
                     }else{
-                        setcookie('login', $cliente['email'], strtotime("-1 month"), "/","",false,true);
+                        setcookie('login', $cliente['nome'],time()-3600, "/");
+                        /*setcookie('login', $cliente['email'], strtotime("-1 month"), "/","",false,true);*/
 
                     }
 
