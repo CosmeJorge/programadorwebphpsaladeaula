@@ -43,7 +43,25 @@
 		<?php 
         include "html/header.php"; 
         require_once "src/conexao.php";
-        require_once "src/model/Cliente.php";
+        //require_once "src/model/Cliente.php";
+
+		$id = isset($_GET["id"]) ? $_GET["id"] : 0;
+		if( $id > 0){
+			$sql_code = "SELECT * FROM funcionario WHERE idfuncionario = '$id'";
+			$sql_query = $conexao->query($sql_code);
+
+			if($sql_query->num_rows > 0){
+				$funcionario = $sql_query->fetch_assoc();
+			} else {
+				header("Location: index.php");
+			}
+
+		} else {
+			header("Location: index.php");
+		}
+      
+
+
 
 		if(isset($_GET['gravado'])){
 			
@@ -82,65 +100,73 @@
 
 		<main>
         <div class="container-fluid">
-			<h3>Cadastro de Funcionários</h3>
-			<form class="row g-3 container-fluid" name="f" action="src/controler/funcionario_bd/registroFuncionario.php" method="post">
+			<h3>Meu Cadastro - Funcionário</h3>
+			<form class="row g-3 container-fluid" name="f" action="src/controler/funcionario_bd/editarFuncionario.php" method="post">
+
+			<input type="text" class="form-control" id="id" name="idfuncionario" value="<?=$id?>" hidden>
 
 				<div class="col-md-6 col-sm-12">
 					<label for="nome_id" class="form-label">Nome completo</label>
-					<input type="text" class="form-control" id="nome_id" name="nome" value="" required>
+					<input type="text" class="form-control" id="nome_id" name="nome" value="<?=$funcionario['nome']?>" required>
 				</div>
 				<div class="col-md-6 col-sm-12">
 					<label for="email_id" class="form-label">E-mail</label>
 					<div class="input-group">
 						<span class="input-group-text" id="inputGroupPrepend2">@</span>
-						<input type="email" class="form-control" id="email_id" name="email" value="" aria-describedby="inputGroupPrepend2" required>
+						<input type="email" class="form-control" id="email_id" name="email" value="<?=$funcionario['email']?>" aria-describedby="inputGroupPrepend2" required>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-12">
 					<label for="cpf_id" class="form-label">CPF</label>
-					<input type="cpf" class="form-control" id="cpf_id" name="cpf" value="" required>
+					<input type="cpf" class="form-control" id="cpf_id" name="cpf" value="<?=$funcionario['cpf']?>" required>
 				</div>
 				<div class="col-md-4 col-sm-12">
 					<label for="dtnasci" class="form-label">Data de nascimento</label>
-					<input type="date" class="form-control" id="dtnasci" name="nascimento" value="" required>
+					<input type="date" class="form-control" id="dtnasci" name="nascimento" value="<?=$funcionario['data_nascimento']?>" required>
 				</div>
 				<div class="col-md-4 col-sm-12">
 					<label for="or_id" class="form-label">Celular</label>
-					<input type="text" class="form-control" id="or_id" name="celular" value="" required>
+					<input type="text" class="form-control" id="or_id" name="celular" value="<?=$funcionario['celular']?>" required>
 				</div>
 				<div class="col-md-6 col-sm-12">
 					<label for="estadoc" class="form-label">Estado civil</label>
 					<select class="form-select" id="estadoc" name="estado_civil" required>
-						<option selected disabled value="">Selecione</option>
-						<option value="Solteiro">Solterio(a)</option>
-						<option value="Casado">Casado(a)</option>
-						<option value="Divorciado">Divorciado(a)</option>
-						<option value="Viuvo">Viuvo(a)</option>
+					<option disabled value="">Selecione</option>
+						<option value="Solteiro"
+						<?php if($funcionario['estado_civil'] == "Solteiro"){echo "selected";}?>>Solterio(a)</option>
+						<option value="Casado"
+						<?php if($funcionario['estado_civil'] == "Casado"){echo "selected";}?>>Casado(a)</option>
+						<option value="Divorciado"
+						<?php if($funcionario['estado_civil'] == "Divorciado"){echo "selected";}?>>Divorciado(a)</option>
+						<option value="Viuvo"
+						<?php if($funcionario['estado_civil'] == "Viuvo"){echo "selected";}?>
+						>Viuvo(a)</option>
 					</select>
 				</div>
 				<div class="col-md-6 col-sm-12">
 					<label for="tipo_id" class="form-label">Tipo</label>
-					<select class="form-select" id="tipo_id" name="tipo" required>
-						<option selected disabled value="">Selecione</option>
-						<option value="Administrador">Administrador</option>
-						<option value="Vendedor">Vendedor</option>
+					<select class="form-select" id="tipo_id" name="tipo" disabled>
+						<option value="Administrador"
+						<?php if($funcionario['tipo'] == "Administrador"){echo "selected";}?>>Administrador(a)</option>
+						<option value="Vendedo"
+						<?php if($funcionario['tipo'] == "Vendedor"){echo "selected";}?>>Vendedor(a)</option>
 					</select>
 				</div>
 					
 				<div class="col-md-6 col-sm-12">
 					<label for="sen1" class="form-label">Senha</label>
-					<input type="password" class="form-control" id="sen1" onblur="confirma()" name="senha" value="" required>
+					<input type="password" class="form-control" id="sen1" onblur="confirma()" name="senha" value="<?=$funcionario['nome']?>" required>
 				</div>
 				<div class="col-md-6 col-sm-12" id="divConfirma" style="display: none">
 					<label for="sen2" class="form-label">Confirmação senha</label>
-					<input type="password" class="form-control" id="sen2" onblur="verifica()" name="senha2" value="" required>
+					<input type="password" class="form-control" id="sen2" onblur="verifica()" name="senha2" value="<?=$funcionario['nome']?>" required>
 					<div id="erro" class="invalid-feedback" style="display: none">
 						Senhas divergentes.
 					</div>
 				</div>
 				<div class="col-12">
 					<button class="btn btn-primary" type="submit" id="btn-off" disabled style="display: none">Cadastrar</button>
-					<button class="btn btn-primary" type="submit" id="btn-on" >Cadastrar</button>
+					<button class="btn btn-primary" type="submit" id="btn-on" >Salvar</button>
 				</div>
 			</form>
 		</div>

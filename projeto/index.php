@@ -3,10 +3,16 @@
 <?php
 	/*if(isset($_COOKIE['cliente'])){
 		var_dump($_COOKIE['cliente']);
-	}*/
+	}
+		
+		fazendo a aplicação voltar a página anterior
+		$fallback = 'index.php'; // se não existir uma página anterior vai para a página principal
+        $anterior = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $fallback;
+	    header("location: {$anterior}");
+        exit;
 
-	$teste = isset($_COOKIE['cliente']) ? $_COOKIE['cliente'] :'';
-	$login = isset($_COOKIE['login']) ? $_COOKIE['login'] :'';
+	$teste = isset($_COOKIE['cliente']) ? $_COOKIE['cliente'] :'';*/
+	$login = isset($_COOKIE['login']) ? $_COOKIE['login'] : '';
 ?>
 
 <head>
@@ -51,7 +57,7 @@
 		?>
 
 		<?php
-		echo "Cookie: ".$teste;
+		/*echo "Cookie: ".$teste;
 		echo "<br>";
 		echo "Time(): " . time();
 		echo "<br>";
@@ -59,7 +65,7 @@
 		echo "<br>";
 		echo "Data e hora: " . date('d/m/Y H:i:s' , time()+3600);
 		echo "<br>";
-		echo "Cookie 2: ".$login;
+		echo "Cookie 2: ".$login;*/
 		?>
 
 		<div id="banner">

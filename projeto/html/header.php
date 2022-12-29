@@ -1,8 +1,8 @@
 <?php
-$login = isset($_COOKIE['login']) ? $_COOKIE['login'] : '';
-if(!isset($_SESSION)){
-	session_start();
-}
+	$login = isset($_COOKIE['login']) ? $_COOKIE['login'] : '';
+	if(!isset($_SESSION)){
+		session_start();
+	}
 ?>
 <header>
 			<section>
@@ -16,8 +16,10 @@ if(!isset($_SESSION)){
 					data-bs-toggle="modal" data-bs-target="#carrinho_modal">
 					<?php
 					
+					if(!isset($_SESSION)){
+						session_start();
+					}
 				
-
 					if(!isset($_SESSION['id'])){
 
 						echo '<img class="cliente" src="img/clientes.png" alt="" data-bs-toggle="modal" data-bs-target="#login_modal">';
@@ -49,14 +51,15 @@ if(!isset($_SESSION)){
 							<br>
 
 							<label class="form-label">E-mail:</label><br>
-							<input type="text" name="email" class="form-control" placeholder="E-mail"><br>
+							<input type="text" name="email" class="form-control" placeholder="E-mail"value="<?= $login ?>"><br>
 
 							<label class="form-label">Senha:</label><br>
 							<input type="password" name="senha" class="form-control"><br>
 
 							<!-- <input type="submit" value="Entrar" class="btn btn-primary"> -->
-							<div calss="formgroup">
-							<input id="lembrar" name="lembrar" type="checkbox" >
+							<div calss="form-group">
+							<input id="lembrar" name="lembrar" type="checkbox" 
+							<?= ($login != '')? 'checked' :''; ?>>
 							<label for="lembrar">Lembrar meu e-mail</label>
 							<br><br>
 							</div>
@@ -166,7 +169,7 @@ if(!isset($_SESSION)){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-	  
+	   <?php if(isset($_SESSION['carrinho'])) : ?>
         <h2 class="fs-5"><?=count($_SESSION['carrinho']) ?> - PRODUTOS NO SEU CARRINHO</h2><br>
         <?php foreach($_SESSION['carrinho'] as $key => $value) : ?>
             <div>
@@ -180,7 +183,10 @@ if(!isset($_SESSION)){
        
         <hr>
 
-        <?php endforeach; ?>
+        <?php 
+			endforeach; 
+		endif;
+		?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

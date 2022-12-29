@@ -26,52 +26,33 @@
         ?>
 
 		<main>
-		<h4 style="text-align: center">Funcionário - Edição de Dados</h4>
-        <div class = "row row-cols-1 row-cols-md-3 g-4" >
+		<h4 style="text-align: center">Área do Funcionário - Edição de Dados</h4>
+        <div class = "row row-cols-1 row-cols-md-2 g-4" >
 		
-			<a href="#">
+			<a href="edicaoFuncionario.php?id=<?=$id?>">
 			<div class="col" >
 				<div class="card" >
 					<i class="bi bi-person-square text-center text-success" style="font-size: 10rem;"></i>
 					<div class="card-body">
-						<h5 class="card-title text-center">Dados Pessoais</h5>
+						<h5 class="card-title text-center">Meus Dados</h5>
 					</div>
 				</div>
 			</div>
 			</a>
-	
-			<a href="#">
+			
+			<a href="<?=(isset($_SESSION['tipo']) && $_SESSION['tipo'] =="Administrador")
+			? 'cadastroFuncionario.php' :'#'?>">
+			
 			<div class="col" >
 				<div class="card" >
-					<i class="bi bi-house text-center text-danger" style="font-size: 10rem;"></i>
+					<i class="bi-folder-plus text-center " style="font-size: 10rem;"></i>
 					<div class="card-body">
-						<h5 class="card-title text-center">Endereço</h5>
+						<h5 class="card-title text-center">Cadastro de Funcionários</h5>
 					</div>
 				</div>
 			</div>
 			</a>
-	
-			<a href="#">
-			<div class="col" >
-				<div class="card" >
-					<i class="bi bi-telephone text-center" style="font-size: 10rem;"></i>
-					<div class="card-body">
-						<h5 class="card-title text-center">Contatos</h5>
-					</div>
-				</div>
-			</div>
-			</a>
-	
-			<a href="#">
-			<div class="col" >
-				<div class="card" >
-					<i class="bi bi-table text-center" style="font-size: 10rem;"></i>
-					<div class="card-body">
-						<h5 class="card-title text-center">Histórico de compras</h5>
-					</div>
-				</div>
-			</div>
-			</a>
+
 
 			</div>
 		</main>

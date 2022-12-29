@@ -20,8 +20,13 @@
                     BEM VINDO: <?= substr($_SESSION['nome'], 0, 
                     strpos($_SESSION['nome'], " ")); ?>
                 </a></li>
-            <?php } ?>
+            <?php } 
+        
+                if(isset($_SESSION['tipo']) && $_SESSION['tipo'] =="Administrador"){
+                        echo '<li><a href="funcionario.php">Funcionarios</a></li>';
+                    }
 
+                    ?>
         </ul>
     </nav>
     
