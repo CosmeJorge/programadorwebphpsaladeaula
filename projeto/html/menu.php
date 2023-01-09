@@ -4,9 +4,11 @@
             <li><a href="produtos.php">Produtos</a></li>
            
             <?php
+         
 
             if(isset($_SESSION['tipo'])){
                 echo '<li><a href="clientes.php">Clientes</a></li>';
+            
             }elseif(isset($_SESSION['id'])) {
                 echo '<li><a href="clienteConfig.php">Configuração</a></li>';
             }

@@ -1,5 +1,6 @@
 <?php
     require_once "../../conexao.php";
+    $idlogado = 0;
 
     if(isset($_POST["email"]) || isset($_POST["senha"])){
             $email = $conexao->real_escape_string($_POST["email"]);
@@ -23,6 +24,7 @@
                     $_SESSION['id'] = $funcionario['idfuncionario'];
                     $_SESSION['nome'] = $funcionario['nome'];
                     $_SESSION['tipo'] = $funcionario['tipo'];
+                    $idlogado = $funcionario['idfuncionario'];
                     
                     header("Location: ../../../index.php");
                 } else {

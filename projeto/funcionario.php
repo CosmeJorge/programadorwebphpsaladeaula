@@ -33,6 +33,15 @@
         ?>
 
         <main>
+        <?php
+		if(isset($_SESSION['tipo']) && $_SESSION['tipo'] =="Administrador"){
+		echo '<a href="cadastroFuncionario.php" class="col-8 btn btn-link" style="float: right;" >
+			<i class="bi bi-plus-circle" style="font-size: 2rem;"></i>
+			<h6>Cadastrar</h6>
+		</a>';
+
+		}
+		?>
 			<h1>Funcionários</h1>
             <h3>Lista de cadastrados</h3>
             <div class="table-responsive">
