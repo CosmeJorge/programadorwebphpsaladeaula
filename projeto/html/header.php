@@ -195,4 +195,49 @@
     </div>
   </div>
 </div>
-		
+<?php
+//Remover do Carrinho
+	if(isset($_GET['remover'])){
+		$idRemovido = $_GET['remover'];
+		unset($_SESSION['carrinho'][$_GET['remover']]);
+
+		if(isset($_SESSION['carrinho'])){
+			if(count($_SESSION['carrinho']) == 0){
+				unset($_SESSION['carrinho']);
+			}
+		}
+		unset($_GET['remover']);
+
+		echo '<script>
+		let dominio = window.location.host;
+		let end = window.location.href; // mais_detalhes.php
+		let finalEnd = end.indexof("."); // posicao do caracter "."
+		let pagina end.substr((dominio.length + 9), finalEnd); // mais_detalhes
+		let idRemovido = end.substr(end.idexof("=")+1, end.length);
+		console.log("Domínio: "+dominio);
+		console.log("Tamanho do domínio: "+dominio.length);
+		console.log("Pagina: "+pagina);
+		console.log("Endereço 1: "+end);
+		console.log("Tamano do Endereço 1: "+end.length);
+		console.log("Posição do ponto do Endereço 1: "+end.indexof);
+		if(pagina == "mais_detalhes"){
+			//end = end.substr(0, end.indexof("?"));
+			//end = end + "?id=" + idItemRemovido;
+			end = pagina + ".php?id=" + idItemRemovido;
+		} else{
+			end = end.substr(0, end.indexof("?"));
+		}
+	
+		console.log("Tamano do Endereço 2: "+end);
+		</script>'
+	}
+?>
+<script>
+    const btn = document.querySelector("#excluir")
+
+
+
+    bnt.addEventListener('click', () =>{
+        location.reload()
+    })
+</script>		
