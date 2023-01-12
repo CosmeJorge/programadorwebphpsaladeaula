@@ -12,11 +12,12 @@ if(isset($_GET['adicionar'])){
                 'idEstoque' => $idItem, 
                 'produto' => $objEstoque->getProduto()->getNome(), 
                 'valor' => $objEstoque->getValorVenda(), 
-                'qtd' => 1 );
+                'qtd' => 1, 
+                'obj' => serialize($objEstoque) );
         }
 
         echo "<script>alert('O item foi adicionado ao carrinho.');</script>";
-        echo "<escript> window.location.href='mais_detalhes.php?id=$id';</script>";
+        echo "<script> window.location.href='mais_detalhes.php?id=$id'; </script>";
 
     } else {
         die('Você não pode adicionar um item que não existe.');
@@ -37,6 +38,7 @@ if(isset($_SESSION['carrinho'])){
         echo "<br>";
         echo "Valor x QTD: " . number_format($value['valor'] * $value['qtd'], 2, ',', '.');
         echo "<br><hr>";
+        
     }
 }
 
