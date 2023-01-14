@@ -8,16 +8,23 @@
 
 	<!--  -->
 	<body>
-		<?php 
+        <?php 
+        
+		include_once "src/model/protect.php";
 		include "html/header.php";
 		include_once "src/model/produto.php";
 		include_once "src/model/estoque.php";
+        include_once "src/conexao.php";
+        
+        $id = $_SESSION['id']
 		?>
 		<main>
-			<h1>Carrinho de compras</h1>
+			<h1>Registro de compras</h1>
 
 			<h3>Lista cadastrados</h3>
-			<?php if(isset($_SESSION['carrinho'])) : ?>
+            <?php if(isset($_SESSION['carrinho'])) : 
+            $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto IN (";
+                ?>
 			<div class="table-responsive"> 	
 				<table class="table table-bordered align-middle" >
 					<tr>
@@ -33,7 +40,8 @@
 					</tr>
 					<?php 
 					$totalCompra = 0;
-					foreach($_SESSION['carrinho'] as $key => $value) :
+                    foreach($_SESSION['carrinho'] as $key => $value) :
+                        $sql_code = $sql_code . unserialize($value['obj'])->getProduto()->getIdProduto() . ", ";
 					?>
 					<tr>
 						<td><img width="50" src="<?= unserialize($value['obj'])->getProduto()->getFoto()?>"></td>
@@ -52,7 +60,9 @@
 						</a></td>
 					</tr>
 					<?php
-					endforeach
+                    endforeach;
+                    $sql_code = substr($sql_code, 0,(strlen($sql_code) -2));
+                    $sql_code = $sql_code . ");";
 					?>
 					<tr>
 					<td colspan="7" style="text-align: center;">TOTAL</td>
@@ -62,7 +72,33 @@
 			</div>
 			<?php else :
 			echo "<h3 style='text-align: center; margin-top: 50px'>Não há produto no carrinho.</h3>";
-			endif;
+            endif;
+
+            $podeRegistrar = true;
+            $texto = "Não possuimos a quantidade do produto solicitado";
+            
+            $sql_query = $conexao->query($sql_code);
+            $lista = [];
+            if($sql_query->mysql_num_rows > 0){
+                $lista = $sql_query->fetch_all(MYSQLI_ASSOC());
+
+                foreach($lista as $registro){
+                    $qtdSolicitado = $_SESSION['carrinho'][$registro['idproduto']]['qtd'];
+                    if($registro['qtd'] < $qtdSolicitado){
+                        $podeRegistrar = false;
+                        $texto = $texto . "\\n" . $qtdSolicitado . " - " . $registro['nome'];
+                    } else {
+
+                    }
+                }
+            }
+
+            if($podeRegistrar){
+                echo "<script> alert('REGISTRADO');</script>";
+            } else {
+                echo "<script> alert('$texto');</script>";
+
+            }
 			?>
 			<div style='text-align: center'>
 			<a href="produtos.php" type="button" class="btn btn-success btn-lg">Continuar Comprando</a>
