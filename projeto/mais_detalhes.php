@@ -58,6 +58,18 @@
             );
 
         }
+        $sql_saldo_entrada = "SELECT SUM(qtd) as saldo from estoque where registro = 'ENTRADA' AND id_produto = $id";
+        $sql_saldo_saida = "SELECT SUM(qtd) as saldo from estoque where registro = 'SAÍDA' AND id_produto = $id";
+        $totalEntrada = $conexao->query($sql_saldo_entrada);
+        $totalSaida = $conexao->query($sql_saldo_saida);
+        $saldo1 = $totalEntrada->fetch_assoc();
+        $saldo2 = $totalEntrada->fetch_assoc();
+        $total = (isset($saldo1['saldo']) ? $saldo1['saldo'] : 0 ) - (isset($saldo2['saldo']) ? $saldo2['saldo'] : 0 ); 
+        if( $total > 0 ){
+			echo ' SIM';
+		}else{
+			echo ' NÃO';
+		}
 
     } 
 

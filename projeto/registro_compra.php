@@ -20,10 +20,11 @@
 		?>
 		<main>
 			<h1>Registro de compras</h1>
-
 			<h3>Lista cadastrados</h3>
             <?php if(isset($_SESSION['carrinho'])) : 
-            $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto IN (";
+			//$sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto IN (";
+			$sql_code;
+			$lista = [];
                 ?>
 			<div class="table-responsive"> 	
 				<table class="table table-bordered align-middle" >
@@ -41,7 +42,15 @@
 					<?php 
 					$totalCompra = 0;
                     foreach($_SESSION['carrinho'] as $key => $value) :
-                        $sql_code = $sql_code . unserialize($value['obj'])->getProduto()->getIdProduto() . ", ";
+						$idDoProduto = unserialize($value['obj'])->getProduto()->getIdProduto();
+						$sql_code = "SELECT DISTINCT idproduto, nome, tipo, valor_venda, (SELECT  sum(qtd) FROM estoque WHERE registro = 'ENTRADA' AND id_produto = '$idDoProduto') - (SELECT  sum(qtd) as saldo FROM  estoque WHERE registro = 'SAÍDA' AND id_produto = '$idDoProduto') as saldo FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$idDoProduto'";
+
+						$sql_query = $conexao->query($sql_code);
+            
+                        if($sql_query->num_rows > 0){
+                            $lista[] = $sql_query->fetch_assoc();
+                        }
+
 					?>
 					<tr>
 						<td><img width="50" src="<?= unserialize($value['obj'])->getProduto()->getFoto()?>"></td>
@@ -61,8 +70,8 @@
 					</tr>
 					<?php
                     endforeach;
-                    $sql_code = substr($sql_code, 0,(strlen($sql_code) -2));
-                    $sql_code = $sql_code . ");";
+                   /* $sql_code = substr($sql_code, 0,(strlen($sql_code) -2));
+                    $sql_code = $sql_code . ");";*/
 					?>
 					<tr>
 					<td colspan="7" style="text-align: center;">TOTAL</td>
@@ -74,7 +83,7 @@
 			echo "<h3 style='text-align: center; margin-top: 50px'>Não há produto no carrinho.</h3>";
             endif;
 
-            $podeRegistrar = true;
+            $podeRegistrar = false;
             $texto = "Não possuimos a quantidade do produto solicitado";
             
             $sql_query = $conexao->query($sql_code);
@@ -84,21 +93,48 @@
 
                 foreach($lista as $registro){
                     $qtdSolicitado = $_SESSION['carrinho'][$registro['idproduto']]['qtd'];
-                    if($registro['qtd'] < $qtdSolicitado){
-                        $podeRegistrar = false;
-                        $texto = $texto . "\\n" . $qtdSolicitado . " - " . $registro['nome'];
+                    if($registro['qtd'] > $qtdSolicitado){
+                        $podeRegistrar = true;
                     } else {
+                        $texto = $texto . "\\n" . $qtdSolicitado . " - " . $registro['nome'];
 
                     }
                 }
             }
 
             if($podeRegistrar){
-                echo "<script> alert('REGISTRADO');</script>";
+				echo "<script> alert('REGISTRADO');</script>";
+				foreach ($lista as $registro) {
+					$idProduto = $registro['idproduto'];
+					$nomeProduto = $registro['nome'];
+					$tipo = $registro['tipo'];
+					$valor = $registro['valor_venda'];
+					$date = date('Y-m-d');
+
+					$sql_code2 = "INSERT INTO estoque VALUES (NULL, '$idProduto', '$qtdSolicitado', 'SAÍDA', '$data', NULL, '$valor')";
+					$sql_query2 = conexao->($sql_code2);
+					if($sql_query2){
+						echo "Gravou!";
+					} else {
+						echo "Não Gravou!";
+					}
+					
+					$sql_code3 = "INSERT INTO historico_compra VALUES (NULL, '$id', '$data', '$idProduto', 
+					'$nomeProduto', '$tipo', '$valor')";
+					$sql_query3 = conexao->($sql_code3);
+					if($sql_query3){
+						echo "Gravou!";
+					} else {
+						echo "Não Gravou!";
+					}
+				}
+				unset($_SESSION['carrinho']);
+				echo"<script>window.location.href='historico_compra.php';</script>";
             } else {
                 echo "<script> alert('$texto');</script>";
 
-            }
+			}
+
 			?>
 			<div style='text-align: center'>
 			<a href="produtos.php" type="button" class="btn btn-success btn-lg">Continuar Comprando</a>

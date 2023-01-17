@@ -65,7 +65,7 @@
 			</div>
 			</a>
 	
-			<a href="#?aba=3">
+			<a href="historico_compra.php?aba=3">
 			<div class="col" >
 				<div class="card" >
 					<i class="bi bi-table text-center" style="font-size: 10rem;"></i>
